@@ -4,7 +4,18 @@
 	$page_n=$page+1;
 	$page_l=$page-1;
 	echo '
-		<div style="margin-left:30px;">
+		<div style="margin-left:30px;"><div class="modal fade" id="modaleins" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+ 										<div class="modal-dialog" role="document">
+    										<div class="modal-content">
+      										<div class="modal-header" style="padding-top:5px; padding-bottom:20px; padding-right:10px;">
+        											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      										</div>
+      										<div class="modal-body" id="modal_text">
+      										 <h3>Lyrics werden geladen...</h3>
+      										</div>
+      									</div>
+  										</div>
+									</div>           
 			<table>
    			<tbody>';
 					foreach($tracks as $track){
@@ -99,7 +110,7 @@
 						$lyric_band = strtolower(preg_replace ( '/[^a-z0-9]/i', '', $artist_name )); 
 						$lyric_name = strtolower(preg_replace ( '/[^a-z0-9]/i', '', $track_name)); 
 						
-						$url="http://www.azlyrics.com/lyrics/".$lyric_band."/".$lyric_name.".html"	;				
+						$url="prox.php?artist=".$lyric_band."&song=".$lyric_name;				
 						echo'
 								<tr frame="hsides" class="" style="'; if($date_decode=="wird gerade gehört") { echo'background-color: #F2F5A9;';} elseif($i==0) { echo'background-color: #F2F2F2;';} if(( (isset($ch_m_in) and isset($ch_m)) and $ch_m_in!=$ch_m) or (isset($show_date) and $show_date==1)) {echo' border-top: 1px solid #D2D2D2; ';} echo'">
 									<td class="list">
@@ -142,23 +153,12 @@
 									<td class="list_image">
    	         	    			<span class="">
       	         	     			<span class="chartlist-image">
-												<label style="padding:1px; margin:0;" data-toggle="modal" data-target="#'.$date_uts.'" onclick="loadDoc()">
+												<label href="'.$url.'" style="padding:1px; margin:0;" data-toggle="modal" data-target="#modaleins" onclick="loadDoc()">
 													<div class="lyric" style="border-radius: 3px;"></div>
 												</label>
          	   						</span>
  	  	 								</span>  
- 	  	 									<div class="modal fade" id="'.$date_uts.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
- 										<div class="modal-dialog" role="document">
-    										<div class="modal-content">
-      										<div class="modal-header" style="padding-top:5px; padding-bottom:20px; padding-right:10px;">
-        											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      										</div>
-      										<div class="modal-body" id="'.$date_uts.'_text">
-      										 <a href="'.$url.'" target="_blank">hier klicken</a>
-      										</div>
-      									</div>
-  										</div>
-									</div>            		
+ 	  	 									 		
       	   	       		</td>
          	   	         <td class="list" style="padding-right:2px;">';
          	   	         if($date_decode=="wird gerade gehört") {
